@@ -8,9 +8,22 @@ using System.Xml.Linq;
 
 namespace RPG_Heroes.Hero.HeroClasses
 {
+    public enum ValidWeaponTypes
+    {
+        Staffs,
+        Wands
+    }
+    public enum ValidArmorTypes
+    {
+        Cloth
+    }
+
     class Mage : Hero
     {
         public HeroAttributes LevelAttributes { get; set; }
+        public ValidArmorTypes ValidArmorTypes { get; set; }
+        public ValidWeaponTypes ValidWeaponTypes { get; set; }
+
         public Mage(string name) : base(name)
         {
             LevelAttributes = new HeroAttributes(1, 1, 8);

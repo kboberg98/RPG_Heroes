@@ -18,13 +18,13 @@ namespace RPG_Heroes.Hero.Items
     class Armor : Item
     {
         public ArmorType ArmorType { get; set; }
-        public HeroAttributes Bonuses { get; set; }
+        public HeroAttributes ArmorAttributes { get; set; }
 
-        public Armor(string name, int requiredLevel, int slot, ArmorType armorType, HeroAttributes bonuses)
+        public Armor(string name, int requiredLevel, Slot slot, ArmorType armorType, HeroAttributes armorAttributes)
             : base(name, requiredLevel, slot)
         {
             ArmorType = armorType;
-            Bonuses = bonuses;
+            ArmorAttributes = armorAttributes;
         }
     }
 }

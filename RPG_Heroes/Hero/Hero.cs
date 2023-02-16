@@ -10,10 +10,17 @@ using System.Threading.Tasks;
 
 namespace RPG_Heroes.Hero
 {
+    public struct Equipment<Slot, Item>
+
     abstract class Hero
     {
         public string Name { get; set; }
         public int Level { get; set; }
+        private Slot slot;
+        private Item item;
+        public Equipment(Slot slot, Item item);
+        public Slot slot { get; set; }
+        public Item item { get; set; }
 
         public Hero(string name)
         {
