@@ -10,9 +10,10 @@ namespace RPG_Heroes.Hero.Items
 {
     public enum ArmorType
     {
-        Light,
-        Medium,
-        Heavy
+        Cloth,
+        Leather,
+        Mail,
+        Plate
     }
 
     class Armor : Item

@@ -1,5 +1,4 @@
-﻿using RPG_Heroes.Hero.Attributes;
-using RPG_Heroes.Hero.Inventory;
+﻿using RPG_Heroes.Hero.Inventory;
 using RPG_Heroes.Hero.Items;
 using System;
 using System.Collections.Generic;
@@ -10,26 +9,33 @@ using System.Threading.Tasks;
 
 namespace RPG_Heroes.Hero
 {
-    public struct Equipment<Slot, Item>
-
     abstract class Hero
     {
         public string Name { get; set; }
         public int Level { get; set; }
-        private Slot slot;
-        private Item item;
-        public Equipment(Slot slot, Item item);
-        public Slot slot { get; set; }
-        public Item item { get; set; }
+        public Dictionary<Slot, Item> Equipment { get; set; }
+        public List<WeaponType> ValidWeaponTypes { get; set; }
+        public List<ArmorType> ValidArmorTypes { get; set; }
 
-        public Hero(string name)
+        public Hero(string name, List<WeaponType> validWeaponTypes, List<ArmorType> validArmorTypes)
         {
             Name = name;
             Level = 1;
+            Equipment = new Dictionary<Slot, Item>
+            {
+                {Slot.Weapon, null },
+                {Slot.Head, null },
+                {Slot.Body, null },
+                {Slot.Legs, null }
+            };
+            ValidWeaponTypes = validWeaponTypes;
+            ValidArmorTypes = validArmorTypes;
         }
 
         public abstract void LevelUp();
         public abstract void Display();
+        public abstract void EquipWeapon(Weapon weapon);
+        public abstract void EquipArmor(Slot slot, Armor armor);
         //public abstract void Attack();
 
         /*public void Equip(Item item)

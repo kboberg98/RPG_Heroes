@@ -9,13 +9,13 @@ namespace RPG_Heroes.Hero.Items
 {
     public enum WeaponType
     {
-        Axes,
-        Bows,
-        Daggers,
-        Hammers,
-        Staffs,
-        Swords,
-        Wands
+        Axe,
+        Bow,
+        Dagger,
+        Hammer,
+        Staff,
+        Sword,
+        Wand
     }
 
     class Weapon : Item
@@ -23,11 +23,12 @@ namespace RPG_Heroes.Hero.Items
         public WeaponType WeaponType { get; set; }
         public int WeaponDamage { get; set; }
 
-        public Weapon(string name, int requiredLevel, Slot slot, WeaponType weaponType, int weaponDamage)
-            : base(name, requiredLevel, slot)
+        public Weapon(string name, int requiredLevel, WeaponType weaponType, int weaponDamage)
+            : base(name, requiredLevel, Slot.Weapon)
         {
             WeaponType = weaponType;
             WeaponDamage = weaponDamage;
+            
         }
     }
 }

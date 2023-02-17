@@ -1,4 +1,6 @@
 ﻿using RPG_Heroes.Hero.Attributes;
+using RPG_Heroes.Hero.Inventory;
+using RPG_Heroes.Hero.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +13,10 @@ namespace RPG_Heroes.Hero.HeroClasses
     class Warrior : Hero
     {
         public HeroAttributes LevelAttributes { get; set; }
-        public Warrior(string name) : base(name)
+        public Warrior(string name) : base(name, new List<WeaponType> { WeaponType.Axe, WeaponType.Hammer, WeaponType.Sword }, new List<ArmorType> { ArmorType.Mail, ArmorType.Plate })
         {
             LevelAttributes = new HeroAttributes(5, 2, 1);
         }
-
-        /*public override void Attack()
-        {
-            throw new NotImplementedException();
-        }*/
 
         public override void LevelUp()
         {
@@ -33,6 +30,16 @@ namespace RPG_Heroes.Hero.HeroClasses
             Console.WriteLine("Strength: " + LevelAttributes.Strength);
             Console.WriteLine("Dexterity: " + LevelAttributes.Dexterity);
             Console.WriteLine("Intelligence: " + LevelAttributes.Intelligence);
+        }
+
+        public override void EquipWeapon(Weapon weapon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void EquipArmor(Slot slot, Armor armor)
+        {
+            throw new NotImplementedException();
         }
     }
 }

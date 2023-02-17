@@ -25,6 +25,7 @@ namespace RPG_Heroes.Hero.Inventory
             Name = name;
             RequiredLevel = requiredLevel;
             Slot = slot;
+
         }
     }
 }

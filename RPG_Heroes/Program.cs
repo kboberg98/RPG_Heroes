@@ -1,4 +1,5 @@
 ﻿using RPG_Heroes.Hero.HeroClasses;
+using RPG_Heroes.Hero.Items;
 
 namespace RPG_Heroes
 {
@@ -6,11 +7,13 @@ namespace RPG_Heroes
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
             Mage mage = new Mage("Harry");
-            mage.Display();
+            Weapon shadowmourn = new Weapon("Shadowmourn", 1, WeaponType.Sword, 100);
+            Weapon bigstaff = new Weapon("Bigstaff", 1, WeaponType.Staff, 100);
             mage.LevelUp();
+            mage.EquipWeapon(bigstaff);
             mage.Display();
+            mage.DisplayEquipment();
         }
     }
 }
