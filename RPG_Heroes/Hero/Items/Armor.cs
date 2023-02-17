@@ -21,11 +21,11 @@ namespace RPG_Heroes.Hero.Items
         public ArmorType ArmorType { get; set; }
         public HeroAttributes ArmorAttributes { get; set; }
 
-        public Armor(string name, int requiredLevel, Slot slot, ArmorType armorType, HeroAttributes armorAttributes)
+        public Armor(string name, int requiredLevel, Slot slot, ArmorType armorType, int armorStrength, int armorDexterity, int armorIntellect)
             : base(name, requiredLevel, slot)
         {
             ArmorType = armorType;
-            ArmorAttributes = armorAttributes;
+            ArmorAttributes = new HeroAttributes(armorStrength, armorDexterity, armorIntellect);
         }
     }
 }
