@@ -12,7 +12,7 @@ namespace RPG_Heroes.Hero.HeroClasses
 {
     class Mage : Hero
     {
-        public HeroAttributes LevelAttributes { get; set; }
+        private readonly HeroAttributes LevelAttributes;
 
         public Mage(string name) : base(name, new List<WeaponType> { WeaponType.Staff, WeaponType.Wand }, new List<ArmorType> { ArmorType.Cloth })
         {
@@ -96,14 +96,14 @@ namespace RPG_Heroes.Hero.HeroClasses
             HeroAttributes TotalAttributes = new (0, 0, 0);
             TotalAttributes.Increase(LevelAttributes.Strength, LevelAttributes.Dexterity, LevelAttributes.Intelligence);
 
-            foreach (KeyValuePair<Slot, Item> kvp in Equipment)
+            foreach (KeyValuePair<Slot, Item?> kvp in Equipment)
             {
                 if (kvp.Value != null)
                 {
                     if (kvp.Value is Armor)
                     {
-                        Armor armor = kvp.Value as Armor;
-                        TotalAttributes.Increase(armor.ArmorAttributes.Strength, armor.ArmorAttributes.Dexterity, armor.ArmorAttributes.Intelligence);
+                        if (kvp.Value is Armor armor)
+                            TotalAttributes.Increase(armor.ArmorAttributes.Strength, armor.ArmorAttributes.Dexterity, armor.ArmorAttributes.Intelligence);
                     }
                 }
             }
@@ -112,12 +112,14 @@ namespace RPG_Heroes.Hero.HeroClasses
 
         public override double GetHeroDamage()
         {
-            double HeroDamage;
+            double HeroDamage = 0;
             HeroAttributes TotalAttributes = GetTotalAttributes();
             if (Equipment[Slot.Weapon] != null)
             {
-                Weapon? weapon = Equipment[Slot.Weapon] as Weapon;
-                HeroDamage = weapon.WeaponDamage * (1 + (double)TotalAttributes.Intelligence / 100);
+                if (Equipment[Slot.Weapon] is Weapon weapon)
+                {
+                    HeroDamage = weapon.WeaponDamage * (1 + (double)TotalAttributes.Intelligence / 100);
+                }
             } else
             {
                 HeroDamage = 1 * (1 + (double)TotalAttributes.Intelligence / 100);

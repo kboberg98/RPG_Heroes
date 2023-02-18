@@ -12,17 +12,17 @@ namespace RPG_Heroes.Hero
 {
     abstract class Hero
     {
-        public string Name { get; set; }
+        public string Name { get; }
         public int Level { get; set; }
-        public Dictionary<Slot, Item> Equipment { get; set; }
-        public List<WeaponType> ValidWeaponTypes { get; set; }
-        public List<ArmorType> ValidArmorTypes { get; set; }
+        public Dictionary<Slot, Item?> Equipment { get; }
+        public List<WeaponType> ValidWeaponTypes { get; }
+        public List<ArmorType> ValidArmorTypes { get; }
 
         public Hero(string name, List<WeaponType> validWeaponTypes, List<ArmorType> validArmorTypes)
         {
             Name = name;
             Level = 1;
-            Equipment = new Dictionary<Slot, Item>
+            Equipment = new Dictionary<Slot, Item?>
             {
                 {Slot.Weapon, null },
                 {Slot.Head, null },

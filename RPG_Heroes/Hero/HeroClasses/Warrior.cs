@@ -12,7 +12,7 @@ namespace RPG_Heroes.Hero.HeroClasses
 {
     class Warrior : Hero
     {
-        public HeroAttributes LevelAttributes { get; set; }
+        private readonly HeroAttributes LevelAttributes;
         public Warrior(string name) : base(name, new List<WeaponType> { WeaponType.Axe, WeaponType.Hammer, WeaponType.Sword }, new List<ArmorType> { ArmorType.Mail, ArmorType.Plate })
         {
             LevelAttributes = new HeroAttributes(5, 2, 1);
@@ -97,14 +97,14 @@ namespace RPG_Heroes.Hero.HeroClasses
             HeroAttributes TotalAttributes = new(0, 0, 0);
             TotalAttributes.Increase(LevelAttributes.Strength, LevelAttributes.Dexterity, LevelAttributes.Intelligence);
 
-            foreach (KeyValuePair<Slot, Item> kvp in Equipment)
+            foreach (KeyValuePair<Slot, Item?> kvp in Equipment)
             {
                 if (kvp.Value != null)
                 {
                     if (kvp.Value is Armor)
                     {
-                        Armor armor = kvp.Value as Armor;
-                        TotalAttributes.Increase(armor.ArmorAttributes.Strength, armor.ArmorAttributes.Dexterity, armor.ArmorAttributes.Intelligence);
+                        if (kvp.Value is Armor armor)
+                            TotalAttributes.Increase(armor.ArmorAttributes.Strength, armor.ArmorAttributes.Dexterity, armor.ArmorAttributes.Intelligence);
                     }
                 }
             }
@@ -113,12 +113,14 @@ namespace RPG_Heroes.Hero.HeroClasses
 
         public override double GetHeroDamage()
         {
-            double HeroDamage;
+            double HeroDamage = 0;
             HeroAttributes TotalAttributes = GetTotalAttributes();
             if (Equipment[Slot.Weapon] != null)
             {
-                Weapon? weapon = Equipment[Slot.Weapon] as Weapon;
-                HeroDamage = weapon.WeaponDamage * (1 + (double)TotalAttributes.Strength / 100);
+                if (Equipment[Slot.Weapon] is Weapon weapon)
+                {
+                    HeroDamage = weapon.WeaponDamage * (1 + (double)TotalAttributes.Strength / 100);
+                }
             }
             else
             {

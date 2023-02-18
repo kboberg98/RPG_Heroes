@@ -16,9 +16,9 @@ namespace RPG_Heroes.Hero.Inventory
 
     abstract class Item
     {
-        public string Name { get; set; }
-        public int RequiredLevel { get; set; }
-        public Slot Slot { get; set; }
+        public string Name { get; }
+        public int RequiredLevel { get; }
+        public Slot Slot { get; }
 
         protected Item(string name, int requiredLevel, Slot slot)
         {
