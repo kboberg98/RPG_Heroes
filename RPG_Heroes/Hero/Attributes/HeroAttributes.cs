@@ -19,13 +19,13 @@ namespace RPG_Heroes.Hero.Attributes
             Intelligence = intelligence;
         }
 
-        public HeroAttributes Add(HeroAttributes other)
+        /*public HeroAttributes Add(HeroAttributes other)
         {
             return new HeroAttributes(
                 Strength + other.Strength,
                 Dexterity + other.Dexterity,
                 Intelligence + other.Intelligence);
-        }
+        }*/
 
         public HeroAttributes Increase(int strength, int dexterity, int intelligence)
         {

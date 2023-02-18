@@ -13,12 +13,10 @@ namespace RPG_Heroes.Hero.HeroClasses
     class Mage : Hero
     {
         public HeroAttributes LevelAttributes { get; set; }
-        public HeroAttributes TotalArmorAttributes { get; set; }
 
         public Mage(string name) : base(name, new List<WeaponType> { WeaponType.Staff, WeaponType.Wand }, new List<ArmorType> { ArmorType.Cloth })
         {
             LevelAttributes = new HeroAttributes(1, 1, 8);
-            TotalArmorAttributes = new HeroAttributes(0, 0, 0);
         }
 
         public override void LevelUp()
@@ -56,15 +54,12 @@ namespace RPG_Heroes.Hero.HeroClasses
                     {
                         case Slot.Head:
                             Equipment[Slot.Head] = armor;
-                            TotalArmorAttributes.Increase(armor.ArmorAttributes.Strength, armor.ArmorAttributes.Dexterity, armor.ArmorAttributes.Intelligence);
                             break;
                         case Slot.Body:
                             Equipment[Slot.Body] = armor;
-                            TotalArmorAttributes.Increase(armor.ArmorAttributes.Strength, armor.ArmorAttributes.Dexterity, armor.ArmorAttributes.Intelligence);
                             break;
                         case Slot.Legs:
                             Equipment[Slot.Legs] = armor;
-                            TotalArmorAttributes.Increase(armor.ArmorAttributes.Strength, armor.ArmorAttributes.Dexterity, armor.ArmorAttributes.Intelligence);
                             break;
                         default:
                             Console.WriteLine("Invalid item slot.");
@@ -83,38 +78,51 @@ namespace RPG_Heroes.Hero.HeroClasses
 
         public override void Display()
         {
+            HeroAttributes TotalAttributes = GetTotalAttributes();
+            Double HeroDamage = GetHeroDamage();
             Console.WriteLine("Name: " + Name);
+            Console.WriteLine("Class: Mage");
             Console.WriteLine("Level: " + Level);
-            Console.WriteLine("Strength: " + LevelAttributes.Strength);
-            Console.WriteLine("Dexterity: " + LevelAttributes.Dexterity);
-            Console.WriteLine("Intelligence: " + LevelAttributes.Intelligence);
-            Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine("Total armor attributes: ");
-            Console.WriteLine("Strength: " + TotalArmorAttributes.Strength);
-            Console.WriteLine("Dexterity: " + TotalArmorAttributes.Dexterity);
-            Console.WriteLine("Intelligence: " + TotalArmorAttributes.Intelligence);
+            Console.WriteLine("Strength: " + TotalAttributes.Strength);
+            Console.WriteLine("Dexterity: " + TotalAttributes.Dexterity);
+            Console.WriteLine("Intelligence: " + TotalAttributes.Intelligence);
+            Console.WriteLine("Hero Damage: " + HeroDamage);
             Console.ReadLine();
             Console.Clear();
         }
 
-        public void DisplayEquipment()
+        public override HeroAttributes GetTotalAttributes()
         {
-            Console.WriteLine("Current Equipment:");
+            HeroAttributes TotalAttributes = new (0, 0, 0);
+            TotalAttributes.Increase(LevelAttributes.Strength, LevelAttributes.Dexterity, LevelAttributes.Intelligence);
+
             foreach (KeyValuePair<Slot, Item> kvp in Equipment)
             {
-                Console.Write(kvp.Key.ToString() + ": ");
                 if (kvp.Value != null)
                 {
-                    Console.WriteLine(kvp.Value.Name);
-                }
-                else
-                {
-                    Console.WriteLine("empty");
+                    if (kvp.Value is Armor)
+                    {
+                        Armor armor = kvp.Value as Armor;
+                        TotalAttributes.Increase(armor.ArmorAttributes.Strength, armor.ArmorAttributes.Dexterity, armor.ArmorAttributes.Intelligence);
+                    }
                 }
             }
-            Console.ReadLine();
-            Console.Clear();
+            return TotalAttributes;
+        }
+
+        public override double GetHeroDamage()
+        {
+            double HeroDamage;
+            HeroAttributes TotalAttributes = GetTotalAttributes();
+            if (Equipment[Slot.Weapon] != null)
+            {
+                Weapon? weapon = Equipment[Slot.Weapon] as Weapon;
+                HeroDamage = weapon.WeaponDamage * (1 + (double)TotalAttributes.Intelligence / 100);
+            } else
+            {
+                HeroDamage = 1 * (1 + (double)TotalAttributes.Intelligence / 100);
+            }
+            return HeroDamage;
         }
     }
 }
