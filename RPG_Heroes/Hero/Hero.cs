@@ -40,7 +40,7 @@ namespace RPG_Heroes.Hero
         public abstract HeroAttributes GetTotalAttributes();
         public abstract double GetHeroDamage();
 
-        /*public void DisplayEquippedItems()
+        public void DisplayEquippedItems()
         {
             Console.WriteLine($"Equipped items for {Name}:");
             foreach (KeyValuePair<Slot, Item> kvp in Equipment)
@@ -65,7 +65,5 @@ namespace RPG_Heroes.Hero
             }
             Console.ReadLine();
             Console.Clear();
-            //public abstract void TotalAttributes();
-            //public abstract void Attack();
-        }*/
+        }
 }   }

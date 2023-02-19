@@ -14,12 +14,16 @@ namespace RPG_Heroes
             Armor clothhead = new Armor("Clothhead", 2, Hero.Inventory.Slot.Head, ArmorType.Cloth, 1, 1, 2);
             Armor clothchest = new Armor("Clothchest", 2, Hero.Inventory.Slot.Body, ArmorType.Cloth, 1, 1, 4);
             Armor clothpants = new Armor("Clothpants", 2, Hero.Inventory.Slot.Legs, ArmorType.Cloth, 1, 1, 2);
+            Armor mailchest = new Armor("Mailchest", 1, Hero.Inventory.Slot.Body, ArmorType.Mail, 1, 1, 1);
             mage.LevelUp();
-            //mage.EquipWeapon(bigstaff);
-            //mage.EquipArmor(clothchest);
-            //mage.EquipArmor(clothpants);
-            //mage.EquipArmor(clothhead);
+            mage.EquipWeapon(bigstaff);
+            mage.EquipArmor(clothchest);
+            mage.EquipArmor(clothpants);
+            mage.EquipArmor(clothhead);
+            //mage.EquipWeapon(shadowmourn);
+            //mage.EquipArmor(mailchest);
             mage.Display();
+            mage.DisplayEquippedItems();
             
             // WARRIOR
             Warrior warrior = new Warrior("Aragorn");

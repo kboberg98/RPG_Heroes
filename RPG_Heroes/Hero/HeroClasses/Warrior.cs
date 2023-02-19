@@ -1,4 +1,5 @@
 ﻿using RPG_Heroes.Hero.Attributes;
+using RPG_Heroes.Hero.CustomExceptions;
 using RPG_Heroes.Hero.Inventory;
 using RPG_Heroes.Hero.Items;
 using System;
@@ -12,7 +13,7 @@ namespace RPG_Heroes.Hero.HeroClasses
 {
     public class Warrior : Hero
     {
-        private readonly HeroAttributes LevelAttributes;
+        public HeroAttributes LevelAttributes;
         public Warrior(string name) : base(name, new List<WeaponType> { WeaponType.Axe, WeaponType.Hammer, WeaponType.Sword }, new List<ArmorType> { ArmorType.Mail, ArmorType.Plate })
         {
             LevelAttributes = new HeroAttributes(5, 2, 1);
@@ -31,16 +32,15 @@ namespace RPG_Heroes.Hero.HeroClasses
                 if (ValidWeaponTypes.Contains(weapon.WeaponType))
                 {
                     Equipment[Slot.Weapon] = weapon;
-                    Console.WriteLine($"Equipped {weapon.Name}");
                 }
                 else
                 {
-                    Console.WriteLine($"Cannot equip {weapon.Name}: invalid weapon type");
+                    throw new InvalidWeaponException($"Cannot equip {weapon.Name}: invalid weapon type for hero");
                 }
             }
             else
             {
-                Console.WriteLine($"Cannot equip {weapon.Name}: hero is too low lvl");
+                throw new InvalidWeaponException($"Cannot equip {weapon.Name}: hero doesn't meet level requirement for this weapon");
             }
         }
 
@@ -62,18 +62,17 @@ namespace RPG_Heroes.Hero.HeroClasses
                             Equipment[Slot.Legs] = armor;
                             break;
                         default:
-                            Console.WriteLine("Invalid item slot.");
-                            break;
+                            throw new InvalidArmorException("Invalid item slot");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Cannot equip {armor.Name}: invalid weapon type");
+                    throw new InvalidArmorException($"Cannot equip {armor.Name}: invalid armor type for hero");
                 }
             }
             else
             {
-                Console.WriteLine($"Cannot equip {armor.Name}: hero is too low lvl");
+                throw new InvalidArmorException($"Cannot equip {armor.Name}: hero doesn't meet level requirement for this armor");
             }
         }
 
