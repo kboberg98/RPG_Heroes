@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace RPG_Heroes.Hero.HeroClasses
 {
-    class Mage : Hero
+    public class Mage : Hero
     {
         private readonly HeroAttributes LevelAttributes;
 

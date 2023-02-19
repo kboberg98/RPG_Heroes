@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPG_Heroes.Hero.Attributes
 {
-    class HeroAttributes
+    public class HeroAttributes
     {
         public int Strength { get; set; }
         public int Dexterity { get; set; }

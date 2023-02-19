@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RPG_Heroes.Hero
 {
-    abstract class Hero
+    public abstract class Hero
     {
         public string Name { get; }
         public int Level { get; set; }

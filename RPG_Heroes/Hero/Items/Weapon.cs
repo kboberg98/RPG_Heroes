@@ -18,7 +18,7 @@ namespace RPG_Heroes.Hero.Items
         Wand
     }
 
-    class Weapon : Item
+    public class Weapon : Item
     {
         public WeaponType WeaponType { get; }
         public int WeaponDamage { get; }

@@ -16,7 +16,7 @@ namespace RPG_Heroes.Hero.Items
         Plate
     }
 
-    class Armor : Item
+    public class Armor : Item
     {
         public ArmorType ArmorType { get; }
         public HeroAttributes ArmorAttributes { get; }

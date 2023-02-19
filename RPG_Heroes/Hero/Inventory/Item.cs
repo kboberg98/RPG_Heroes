@@ -14,7 +14,7 @@ namespace RPG_Heroes.Hero.Inventory
         Legs
     }
 
-    abstract class Item
+    public abstract class Item
     {
         public string Name { get; }
         public int RequiredLevel { get; }

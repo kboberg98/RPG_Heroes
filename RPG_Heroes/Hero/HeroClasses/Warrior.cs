@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace RPG_Heroes.Hero.HeroClasses
 {
-    class Warrior : Hero
+    public class Warrior : Hero
     {
         private readonly HeroAttributes LevelAttributes;
         public Warrior(string name) : base(name, new List<WeaponType> { WeaponType.Axe, WeaponType.Hammer, WeaponType.Sword }, new List<ArmorType> { ArmorType.Mail, ArmorType.Plate })
