@@ -76,19 +76,21 @@ namespace RPG_Heroes.Hero.HeroClasses
             }
         }
 
-        public override void Display()
+        public override string Display()
         {
             HeroAttributes TotalAttributes = GetTotalAttributes();
             Double HeroDamage = GetHeroDamage();
-            Console.WriteLine("Name: " + Name);
-            Console.WriteLine("Class: Ranger");
-            Console.WriteLine("Level: " + Level);
-            Console.WriteLine("Strength: " + TotalAttributes.Strength);
-            Console.WriteLine("Dexterity: " + TotalAttributes.Dexterity);
-            Console.WriteLine("Intelligence: " + TotalAttributes.Intelligence);
-            Console.WriteLine("Hero Damage: " + HeroDamage);
-            Console.ReadLine();
-            Console.Clear();
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Name: " + Name);
+            sb.AppendLine("Class: " + "Ranger");
+            sb.AppendLine("Level: " + Level);
+            sb.AppendLine("Strength: " + TotalAttributes.Strength);
+            sb.AppendLine("Dexterity: " + TotalAttributes.Dexterity);
+            sb.AppendLine("Intelligence: " + TotalAttributes.Intelligence);
+            sb.AppendLine("Hero Damage: " + HeroDamage);
+
+            return sb.ToString();
         }
 
         public override HeroAttributes GetTotalAttributes()

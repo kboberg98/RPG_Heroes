@@ -248,5 +248,40 @@ namespace HeroTests
             //Assert
             Assert.Equal(expectedDamage, rangerDamage);
         }
+
+        [Fact]
+        public void DisplayRangerState_RangerDispayCorrectState()
+        {
+            // Arrange
+            string expectedName = "Legolas";
+            int expectedLevel = 1 + 10;
+            int expectedStrength = 1 + (1 * 10) + 2 + 2 + 2;
+            int expectedDexterity = 7 + (5 * 10) + 10 + 14 + 12;
+            int expectedIntelligence = 1 + (1 * 10) + 2 + 2 + 2;
+            double expectedDamage = 100 * (1 + ((double)expectedDexterity / 100));
+
+            // Act: call the Display() method and capture the output
+            Ranger ranger = new Ranger("Legolas");
+            Weapon epicWeapon = new Weapon("Epic Bow", 10, WeaponType.Bow, 100);
+            Armor epicHead = new Armor("Epic Head", 8, Slot.Head, ArmorType.Mail, 2, 10, 2);
+            Armor epicChest = new Armor("Epic Chest", 9, Slot.Body, ArmorType.Mail, 2, 14, 2);
+            Armor epicLegs = new Armor("Epic Legs", 7, Slot.Legs, ArmorType.Mail, 2, 12, 2);
+            for (int i = 0; i < 10; i++) { ranger.LevelUp(); }
+            ranger.EquipWeapon(epicWeapon);
+            ranger.EquipArmor(epicHead);
+            ranger.EquipArmor(epicChest);
+            ranger.EquipArmor(epicLegs);
+
+            string output = ranger.Display();
+
+            // Assert: check if the output matches the expected output
+            Assert.Contains("Name: " + expectedName, output);
+            Assert.Contains("Class: " + "Ranger", output);
+            Assert.Contains("Level: " + expectedLevel, output);
+            Assert.Contains("Strength: " + expectedStrength, output);
+            Assert.Contains("Dexterity: " + expectedDexterity, output);
+            Assert.Contains("Intelligence: " + expectedIntelligence, output);
+            Assert.Contains("Hero Damage: " + expectedDamage, output);
+        }
     }
 }

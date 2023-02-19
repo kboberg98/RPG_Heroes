@@ -3,6 +3,9 @@ using RPG_Heroes.Hero.HeroClasses;
 using RPG_Heroes.Hero.Items;
 using RPG_Heroes.Hero.Inventory;
 using RPG_Heroes.Hero.Attributes;
+using RPG_Heroes.Hero;
+using System.Reflection.Emit;
+using System.Xml.Linq;
 
 namespace HeroTests
 {
@@ -247,6 +250,41 @@ namespace HeroTests
 
             //Assert
             Assert.Equal(expectedDamage, mageDamage);
+        }
+
+        [Fact]
+        public void DisplayMageState_MageDispayCorrectState()
+        {
+            // Arrange
+            string expectedName = "Harry";
+            int expectedLevel = 1 + 10;
+            int expectedStrength = 1 + (1 * 10) + 2 + 2 + 2;
+            int expectedDexterity = 1 + (1 * 10) + 2 + 2 + 2;
+            int expectedIntelligence = 8 + (5 * 10) + 6 + 8 + 10;
+            double expectedDamage = 80 * (1 + ((double)expectedIntelligence / 100));
+
+            // Act
+            Mage mage = new Mage("Harry");
+            Weapon epicWeapon = new Weapon("Epic Staff", 10, WeaponType.Staff, 80);
+            Armor epicHead = new Armor("Epic Head", 8, Slot.Head, ArmorType.Cloth, 2, 2, 6);
+            Armor epicChest = new Armor("Epic Chest", 9, Slot.Body, ArmorType.Cloth, 2, 2, 8);
+            Armor epicLegs = new Armor("Epic Legs", 7, Slot.Legs, ArmorType.Cloth, 2, 2, 10);
+            for (int i = 0; i < 10; i++) { mage.LevelUp(); }
+            mage.EquipWeapon(epicWeapon);
+            mage.EquipArmor(epicHead);
+            mage.EquipArmor(epicChest);
+            mage.EquipArmor(epicLegs);
+
+            string output = mage.Display();
+
+            // Assert
+            Assert.Contains("Name: " + expectedName, output);
+            Assert.Contains("Class: " + "Mage", output);
+            Assert.Contains("Level: " + expectedLevel, output);
+            Assert.Contains("Strength: " + expectedStrength, output);
+            Assert.Contains("Dexterity: " + expectedDexterity, output);
+            Assert.Contains("Intelligence: " + expectedIntelligence, output);
+            Assert.Contains("Hero Damage: " + expectedDamage, output);
         }
     }
 }

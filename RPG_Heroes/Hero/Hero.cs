@@ -34,7 +34,7 @@ namespace RPG_Heroes.Hero
         }
 
         public abstract void LevelUp();
-        public abstract void Display();
+        public abstract string Display();
         public abstract void EquipWeapon(Weapon weapon);
         public abstract void EquipArmor(Armor armor);
         public abstract HeroAttributes GetTotalAttributes();
@@ -43,18 +43,18 @@ namespace RPG_Heroes.Hero
         public void DisplayEquippedItems()
         {
             Console.WriteLine($"Equipped items for {Name}:");
-            foreach (KeyValuePair<Slot, Item> kvp in Equipment)
+            foreach (KeyValuePair<Slot, Item?> kvp in Equipment)
             {
                 if (kvp.Value != null)
                 {
                     if (kvp.Value is Armor)
                     {
-                        Armor armor = kvp.Value as Armor;
+                        if (kvp.Value is Armor armor)
                         Console.WriteLine($"{kvp.Key}: {armor.Name} (Armor Stength: {armor.ArmorAttributes.Strength})  (Armor Dexterity: {armor.ArmorAttributes.Dexterity})  (Armor Intelligence: {armor.ArmorAttributes.Intelligence})");
                     }
                     else if (kvp.Value is Weapon)
                     {
-                        Weapon weapon = kvp.Value as Weapon;
+                        if (kvp.Value is Weapon weapon)
                         Console.WriteLine($"{kvp.Key}: {weapon.Name} (Damage: {weapon.WeaponDamage})");
                     }
                 }
