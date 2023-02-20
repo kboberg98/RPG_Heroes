@@ -166,7 +166,7 @@ namespace HeroTests
             int expectedTotalIntelligence = 1;
 
             //Act
-            Ranger ranger = new Ranger("Harry");
+            Ranger ranger = new Ranger("Legolas");
             Armor mailHeadPiece = new Armor("Mailhead", 1, Slot.Head, ArmorType.Mail, 0, 2, 0);
             Armor betterMailHeadPiece = new Armor("Rare Mailhead", 1, Slot.Head, ArmorType.Mail, 0, 4, 0);
             ranger.EquipArmor(mailHeadPiece);

@@ -13,23 +13,28 @@ namespace RPG_Heroes.Hero.HeroClasses
 {
     public class Mage : Hero
     {
-        public HeroAttributes LevelAttributes;
+        public HeroAttributes LevelAttributes; // the hero attributes for this level
 
+        // constructor for the Mage class
         public Mage(string name) : base(name, new List<WeaponType> { WeaponType.Staff, WeaponType.Wand }, new List<ArmorType> { ArmorType.Cloth })
         {
-            LevelAttributes = new HeroAttributes(1, 1, 8);
+            LevelAttributes = new HeroAttributes(1, 1, 8); // set the initial hero attributes for the Mage class
         }
 
+        // level up the hero and increase their attributes
         public override void LevelUp()
         {
             Level++;
             LevelAttributes.Increase(1, 1, 5);
         }
 
+        // equip a weapon for the hero
         public override void EquipWeapon(Weapon weapon)
         {
-            if(Level >= weapon.RequiredLevel)
+            // check if the hero meets the level requirement for the weapon
+            if (Level >= weapon.RequiredLevel)
             {
+                // check if the weapon type is valid for the hero
                 if (ValidWeaponTypes.Contains(weapon.WeaponType))
                 {
                     Equipment[Slot.Weapon] = weapon;
@@ -44,12 +49,16 @@ namespace RPG_Heroes.Hero.HeroClasses
             }
         }
 
+        // equip an armor for the hero
         public override void EquipArmor(Armor armor)
         {
+            // check if the hero meets the level requirement for the armor
             if (Level >= armor.RequiredLevel)
             {
+                // check if the armor type is valid for the hero
                 if (ValidArmorTypes.Contains(armor.ArmorType))
                 {
+                    // assign the armor to the correct equipment slot
                     switch (armor.Slot)
                     {
                         case Slot.Head:
@@ -75,12 +84,13 @@ namespace RPG_Heroes.Hero.HeroClasses
             }
         }
 
+        // display the hero's information
         public override string Display()
         {
             HeroAttributes TotalAttributes = GetTotalAttributes();
             Double HeroDamage = GetHeroDamage();
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(); // use a string builder to create the display string
             sb.AppendLine("Name: " + Name);
             sb.AppendLine("Class: " + "Mage");
             sb.AppendLine("Level: " + Level);
@@ -92,6 +102,7 @@ namespace RPG_Heroes.Hero.HeroClasses
             return sb.ToString();
         }
 
+        // calculate the hero's total attributes
         public override HeroAttributes GetTotalAttributes()
         {
             HeroAttributes TotalAttributes = new (0, 0, 0);
@@ -111,6 +122,7 @@ namespace RPG_Heroes.Hero.HeroClasses
             return TotalAttributes;
         }
 
+        // calculate the hero's damage
         public override double GetHeroDamage()
         {
             double HeroDamage = 0;

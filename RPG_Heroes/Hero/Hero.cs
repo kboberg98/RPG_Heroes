@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace RPG_Heroes.Hero
 {
+    // abstract base class for all Heroes in the game
     public abstract class Hero
     {
         public string Name { get; }
@@ -18,8 +19,10 @@ namespace RPG_Heroes.Hero
         public List<WeaponType> ValidWeaponTypes { get; }
         public List<ArmorType> ValidArmorTypes { get; }
 
+        // Constructor that sets the initial state of the hero
         public Hero(string name, List<WeaponType> validWeaponTypes, List<ArmorType> validArmorTypes)
         {
+            // Initialize properties with default values
             Name = name;
             Level = 1;
             Equipment = new Dictionary<Slot, Item?>
@@ -33,6 +36,7 @@ namespace RPG_Heroes.Hero
             ValidArmorTypes = validArmorTypes;
         }
 
+        // Abstract methods that must be implemented by subclasses of Hero
         public abstract void LevelUp();
         public abstract string Display();
         public abstract void EquipWeapon(Weapon weapon);
@@ -40,6 +44,7 @@ namespace RPG_Heroes.Hero
         public abstract HeroAttributes GetTotalAttributes();
         public abstract double GetHeroDamage();
 
+        // Public method that displays the currently equipped items for the hero
         public void DisplayEquippedItems()
         {
             Console.WriteLine($"Equipped items for {Name}:");
